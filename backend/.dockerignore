@@ -1,5 +1,6 @@
 .git
 .gitignore
+.env
 .editorconfig
 node_modules
 *.log

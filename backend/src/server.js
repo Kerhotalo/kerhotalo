@@ -16,7 +16,13 @@ const server = new ApolloServer({
     return null
   } 
 })
-// TODO: Mongo connection here
+
+const connectionstring = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/kerhotalo?authSource=admin`
+mongoose.connect(connectionstring, { useNewUrlParser: true }, 
+  (err) => { 
+    if(err) console.log(err)
+    else console.log('Connected to database.')
+  })
 
 server.listen().then(({ url }) => {
     console.log(`Kerhotalo Server ready at ${url}`)
