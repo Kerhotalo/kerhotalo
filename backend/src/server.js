@@ -16,7 +16,6 @@ const server = new ApolloServer({
     return null
   } 
 })
-
 // TODO: Mongo connection here
 
 server.listen().then(({ url }) => {
