@@ -11,4 +11,4 @@ WORKDIR /src
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
 RUN chmod +x /wait
 EXPOSE 4000
-CMD /wait && npm run production
+CMD /wait && npm run start
