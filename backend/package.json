@@ -4,8 +4,21 @@
   "description": "Backend for clubhouse",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Toni Iltanen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.4",
+    "crypto": "^1.0.1",
+    "graphql": "^14.5.7",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.1",
+    "util": "^0.12.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0"
+  }
 }
