@@ -22,4 +22,4 @@ docker-compose up
 ## Layouts
 
 ### Frontpage
-![Frontpage](docs/layout/Frontpage%20Desktop.png)
+![Frontpage](docs/layouts/Frontpage%20Desktop.png)
