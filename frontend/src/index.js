@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import fs from 'fs'
+
+if (fs.existsSync('.env')) { 
+    //Load .env if outside docker (.env is ignored in docker build)
+    require('dotenv').config()
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

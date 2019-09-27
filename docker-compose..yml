@@ -1,0 +1,30 @@
+  
+version: '3.2'
+
+services:
+  backend:
+    image: kerhotalo/backend
+    ports:
+      - "4000:4000"
+    environment: 
+      - MONGODB_USER=username
+      - MONGODB_PASSWORD=password
+      - MONGODB_HOST=mongodb
+      - PROFILE_JWT_SECRET=[ Your secret ]
+      - PROFILE_HASH_SECRET=[ Your secret ]
+      - WAIT_HOSTS=mongodb:27017
+
+  frontend:
+    image: kerhotalo/frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_HOST=http://localhost:4000
+
+  mongodb:
+    image: mongo:latest
+    ports: 
+      - "27017:27017"
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
