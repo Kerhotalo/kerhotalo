@@ -4,14 +4,39 @@ const typeDefs = gql`
   Kerhotalo querys
   """
   type Query { 
-    test: Test
+    me: User
   }
   
   """
+  Kerhotalo Mutations
+  """
+  type Mutation {
+    createUser(user: UserInput): User,
+    login(user: LoginInput): User
+  }
+
+  """
   Kerhotalo types
   """
-  type Test {
-      test: String
+  type User {
+    username: String!,
+    email: String!,
+    emailConfirmed: Boolean!,
+    token: String
+  }
+  
+  """
+  Kerhotalo inputs
+  """
+  input UserInput {
+    username: String!,
+    password: String!,
+    email: String!
+  }
+
+  input LoginInput {
+    username: String!,
+    password: String!
   }
 
   """

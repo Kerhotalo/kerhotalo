@@ -1,14 +1,18 @@
 import {AuthenticationError} from 'apollo-server'
-
+import {createUser, login} from './actions/userOperations'
 const resolvers = {
-    Query: {
-
-      test: (obj, args, context) => {
-        if(!context.user) {
-          //throw new AuthenticationError('must authenticate')
-        }
-        return { test: 'ok' }
-      }
+  Query: {
+    me: (obj, args, context) => {
+      if(!context.user) {
+        throw new AuthenticationError('must authenticate')
+      } else {
+        return context.user
+      } 
+    }
+  },
+  Mutation: {
+    login: (obj, args, context) => login(args.user.username, args.user.password),
+    createUser: (obj, args, context) => createUser(args)
   }
 }
 
