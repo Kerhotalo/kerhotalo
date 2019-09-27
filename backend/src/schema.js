@@ -4,7 +4,8 @@ const typeDefs = gql`
   Kerhotalo querys
   """
   type Query { 
-    me: User
+    me: User,
+    search(search: SearchInput): [Clubhouse]
   }
   
   """
@@ -12,17 +13,33 @@ const typeDefs = gql`
   """
   type Mutation {
     createUser(user: UserInput): User,
-    login(user: LoginInput): User
+    login(user: LoginInput): User,
+    createClubhouse(clubhouse: ClubhouseInput): Clubhouse
   }
 
   """
   Kerhotalo types
   """
   type User {
+    _id: String,
     username: String!,
     email: String!,
     emailConfirmed: Boolean!,
     token: String
+  }
+
+  type Clubhouse {
+    _id: String!,
+    title: String!,
+    description: String!,
+    shortDescription: String!,
+    address: String!,
+    city: String!,
+    contact: String!,
+    price: Float,
+    ageRestriction: String,
+    levelRestriction: String,
+    createdBy: User
   }
   
   """
@@ -37,6 +54,24 @@ const typeDefs = gql`
   input LoginInput {
     username: String!,
     password: String!
+  }
+
+  input ClubhouseInput {
+    _id: String,
+    title: String!,
+    description: String!,
+    shortDescription: String!,
+    address: String!,
+    city: String!,
+    contact: String!,
+    price: Float,
+    ageRestriction: String,
+    levelRestriction: String
+  }
+
+  input SearchInput {
+    keywords: String!,
+    city: String
   }
 
   """
