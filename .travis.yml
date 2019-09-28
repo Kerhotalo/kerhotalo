@@ -1,0 +1,25 @@
+language: node_js
+sudo: required
+services:
+- docker
+env:
+  global:
+  - secure: JYgiHLT5vghGtBs/W1zARRK+fAOJuH7hyiEIN8/7qvjbLb6CRPRre4rSorDZyu/j3aPdD0dHEcjUvnpvuWpEwggg5s8HTwyS37jS0UrADcH2AVs/cuMO9iYzv0A8hV24KXSd4lrx1JcUtXxG7GV3/6ZkoGNjmFw6umTOKgYxDSlMPPUwxK5B9wqNbZEPu6x8s/qOGkFrIFqlVHRX6b+Tx5Q9gPxQ92av7M3KxdGZWRCiXzWotgB9A1bIcT72fVsNfYgaRB9tWduFu6rzVvNjm5n/murLdS3WjFuTRM0G6EixjCrBLe/M4V0iEDvM/gwtWyVOJHeK2XYI2YUEhmRNzOhR2UUxKqCLaQvWXmNH9lricaTIJR97OQL6uRgMbuVP8iv1slEzEgjmoJN2Coqfij0MsOjrShRgNf8HDHjE3oNxWIpDJCpiKa7iwJxL8MGFMP94K4EWrzf+EVbtsiBHZO3jxEh2QGVqMXFgKkPK8Sc8xgjgki7EDsocbtqPHVikloVtQ1tdHfjWpm8n88GbW+WZ5om/3Gd7CW+TFCkZR2TmyYzhdvapNND4OX3eePBc+2AdNpWoGrtsaDTTFoMGTncRJwrGkjmCUP0cqCmpV33iD5WGwA991PQhwVGsECKLHgfD1M38JmdV0qT1F5LoOitavmFPolLBZrqfUJo7QGM=
+  - secure: WoW9VPV6yDq1/hdAIv2LYYCPcZ2fX3u1A57ofw7egOLSnLYmi8cJNM3o6FERJLy5k2RgGutMHsaJy1DxP5psvxROnrGIB/K2vUzUh0Ym6Hbgquxz78rsn4yXOiPDNry4ve+K5lr4hDq/yHWyggIR5rQpUPBZDpGLFplS4tJVj0ESqq6KOuNAmFALjKc7niDotply2c1vv3NLI0CrwdwJf+qPE7F+zgtlnoq3rGcZP/IHw7b9p2F9ULAROTBP9jcgITaBDtmHLBl5r9B280Ae3LdllHlrzo1a3x0m308S6cVxTJFZOErX5jqnXWKic/JZu42ftJew56+kmBb0TSMXJ57mZgcFmNm9oOvzxTDCBz/t6WZRqZvoQ4uk417HaUT7vz/NKkGUD4nAo/M/SHFwODjyfzAh7dW+cD00ITz4HyxLjp9iqCiqx65Eh33t/Ur1zw35cZFF6IgEWKQ51S/LQGfgHcSoh174EWrz+IW956fqPPYKPY9/Kiiy6AP/n6JJ2xEwPJdO72ukImK+NYIQeM83S3z2AFOXn02d1hEZWPlsU+Jg/sTGpuQrMKQrclwnrcYiJUy2OKtNC/jnD03QoaRT1k4sGUsRYsI/MBB8kN8ne9AvI52bLZ90TJo9wrVu6DEUyzrKG8AMtULrU0w3jZdmEyaYkwJ9kNkr+g4KEFw=
+node_js:
+- 11.10.0
+before_install:
+- chmod a+x $TRAVIS_BUILD_DIR/scripts/docker_push.sh
+install:
+- cd $TRAVIS_BUILD_DIR/frontend && npm install
+- cd $TRAVIS_BUILD_DIR/backend && npm install
+script:
+- echo "skipping tests for now"
+after_success:
+- cd $TRAVIS_BUILD_DIR/frontend && docker build -t kerhotalo/frontend . --label
+  "version=$TRAVIS_BUILD_NUMBER" --label "commitMessage=$TRAVIS_COMMIT_MESSAGE" --label
+  "commit=$TRAVIS_COMMIT"
+- cd $TRAVIS_BUILD_DIR/backend && docker build -t kerhotalo/backend . --label
+  "version=$TRAVIS_BUILD_NUMBER" --label "commitMessage=$TRAVIS_COMMIT_MESSAGE" --label
+  "commit=$TRAVIS_COMMIT"
+- cd $TRAVIS_BUILD_DIR && ./scripts/docker_push.sh
