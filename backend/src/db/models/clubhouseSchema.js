@@ -14,4 +14,9 @@ const clubhouseSchema = mongoose.Schema({
 },{
   timestamps: true
 })
+
+//Added indexes for search features
+const index = {title: 'text', description: 'text', shortDescription: 'text'}
+clubhouseSchema.index(index)
+
 export default clubhouseSchema
