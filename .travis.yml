@@ -22,4 +22,8 @@ after_success:
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t kerhotalo/backend . --label
   "version=$TRAVIS_BUILD_NUMBER" --label "commitMessage=$TRAVIS_COMMIT_MESSAGE" --label
   "commit=$TRAVIS_COMMIT"
-- cd $TRAVIS_BUILD_DIR && ./scripts/docker_push.sh
+deploy:
+  provider: script
+  script: bash scripts/docker_push.sh
+  on:
+    branch: master
