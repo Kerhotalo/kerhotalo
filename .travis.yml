@@ -25,6 +25,6 @@ after_success:
   "commit=$TRAVIS_COMMIT"
 deploy:
   provider: script
-  script: bash scripts/docker_push.sh
+  script: sh $TRAVIS_BUILD_DIR/scripts/docker_push.sh
   on:
     branch: master
