@@ -11,6 +11,7 @@ node_js:
 before_install:
 - chmod a+x $TRAVIS_BUILD_DIR/scripts/docker_push.sh
 install:
+- npm config set package-lock false
 - cd $TRAVIS_BUILD_DIR/frontend && npm install
 - cd $TRAVIS_BUILD_DIR/backend && npm install
 script:
