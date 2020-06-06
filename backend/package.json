@@ -10,7 +10,7 @@
   "author": "Toni Iltanen",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.9.4",
+    "apollo-server": "^2.14.2",
     "bcrypt": "^3.0.6",
     "config": "^3.2.2",
     "crypto": "^1.0.1",
